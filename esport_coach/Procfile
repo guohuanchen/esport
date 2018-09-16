@@ -1,0 +1,1 @@
+web: gunicorn esport_coach.wsgi

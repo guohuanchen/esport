@@ -1,0 +1,211 @@
+from sideapp.models import *
+from django.utils import timezone
+User.objects.create(userid="fei", password="123A", email="fchen00@citymail.cuny.edu", pname="TheGiant", rank="500", skypeid="giant00", twitchid = "giantwich1")
+User.objects.create(userid="der", password="123B", email="der@yahoo.com", pname="LittleMonkey", rank="400", skypeid="monkey01", twitchid = "monkey01" )
+User.objects.create(userid="sam", password="123C", email="sammy00@yahoo.com", pname="Samma", rank="658", skypeid="samma123", twitchid = "samma123" )
+User.objects.create(userid="pab", password="123D", email="paby@yahoo.com", pname="pabybaby", rank="558", skypeid="paby432", twitchid = "paby432")
+User.objects.create(userid="ton", password="123e", email="tonna@yahoo.com", pname="tona", rank="839", skypeid="tona239", twitchid = "tona239")
+User.objects.create(userid="won", password="123f", email="wonda@yahoo.com", pname="wonda", rank="600", skypeid="won320", twitchid = "won320")
+User.objects.create(userid="kelly", password="123g", email="kell1993@yahoo.com", pname="killy", rank="300", skypeid="kill2341", twitchid = "kill2341")
+User.objects.create(userid="markous", password="123g", email="markous01@yahoo.com", pname="makamarkous", rank="450", skypeid="Markous29", twitchid = "Markous29")
+User.objects.create(userid="wujimama", password="123i", email="wuji199@yahoo.com", pname="wuji199", rank="780", skypeid="wuji199", twitchid = "wuji199")
+User.objects.create(userid="luke", password="123j", email="luke23@yahoo.com", pname="lukely", rank="790", skypeid="luke221", twitchid = "luke221")
+
+
+coa = User.objects.get(userid="fei")
+k = Coach(userid=coa, server="NA", champion="Jungler", role="mid", pricerate=5.20, avatar="http://static.mnium.org/images/contenu/actus/DotA2/Guides/Dota2_ursa_guide.png", rating=5)
+coa1 = User.objects.get(userid="der")
+j = Coach(userid=coa1, server="NA", champion="Axe", role="top", pricerate=22.00, avatar="http://hydra-media.cursecdn.com/dota2.gamepedia.com/thumb/2/22/Axedota2.png/250px-Axedota2.png?version=3febcaad1e01172dbb70bd7024e20eb6", rating=5)
+coa2 = User.objects.get(userid="sam")
+l = Coach(userid=coa2, server="NA", champion="Earthshacker", role="low", pricerate=30.20, avatar="http://hydra-media.cursecdn.com/dota2.gamepedia.com/7/7b/Earthshaker_ingame.png", rating=5)
+coa3 = User.objects.get(userid="pab")
+d = Coach(userid=coa3, server="NA", champion="Pudge", role="mid", pricerate=40.20, avatar="http://hydra-media.cursecdn.com/dota2.gamepedia.com/9/9f/Pudge.png?version=5b76eeddc9ff60a553d8ecdebbd45d82", rating=5)
+coa4 = User.objects.get(userid="ton")
+c = Coach(userid=coa4, server="NA", champion="Clockwerk", role="mid", pricerate=10.20, avatar="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR0oVw5F7Yf4cNavC4eU8ckT7bX-lVuqCdi1oiBugGAOtenSDvL", rating=5)
+k.save()
+j.save()
+l.save()
+d.save()
+c.save()
+
+
+fei = Coach.objects.get(userid="fei")
+der = Coach.objects.get(userid="der")
+sam = Coach.objects.get(userid="sam")
+pab = Coach.objects.get(userid="pab")
+ton = Coach.objects.get(userid="ton")
+won = User.objects.get(userid="won")
+kelly = User.objects.get(userid="kelly")
+markous = User.objects.get(userid="markous")
+wujimama = User.objects.get(userid="wujimama")
+luke = User.objects.get(userid="luke")
+fei1 = Coaching(coach=fei, student=won, date=timezone.now(), pricerate =5.20, quantity = 2)
+fei2 = Coaching(coach=fei, student=kelly, date=timezone.now(), pricerate =5.20, quantity = 1)
+fei3 = Coaching(coach=fei, student=markous, date=timezone.now(), pricerate =5.20, quantity = 2)
+fei4 = Coaching(coach=fei, student=wujimama, date=timezone.now(), pricerate =5.20, quantity = 3)
+fei5 = Coaching(coach=fei, student=luke, date=timezone.now(), pricerate =5.20, quantity = 3)
+fei6 = Coaching(coach=fei, student=luke, date=timezone.now(), pricerate =5.20, quantity = 1)
+
+der1 = Coaching(coach=der, student=won, date=timezone.now(), pricerate =22.0, quantity = 1)
+der2 = Coaching(coach=der, student=kelly, date=timezone.now(), pricerate =22.0, quantity = 2)
+der3 = Coaching(coach=der, student=markous, date=timezone.now(), pricerate =22.0, quantity = 1)
+der4 = Coaching(coach=der, student=wujimama, date=timezone.now(), pricerate =22.0, quantity = 3)
+
+sam1 = Coaching(coach=sam, student=won, date=timezone.now(), pricerate =30.20, quantity = 1)
+sam2 = Coaching(coach=sam, student=kelly, date=timezone.now(), pricerate =30.20, quantity = 2)
+sam3 = Coaching(coach=sam, student=markous, date=timezone.now(), pricerate =30.20, quantity = 2)
+
+pab1 = Coaching(coach=pab, student=won, date=timezone.now(), pricerate =40.20, quantity = 1)
+pab2 = Coaching(coach=pab, student=kelly, date=timezone.now(), pricerate =40.20, quantity = 3)
+
+ton1 = Coaching(coach=ton, student=won, date=timezone.now(), pricerate =10.20, quantity = 3)
+
+fei1.save()
+fei2.save()
+fei3.save()
+fei4.save()
+fei5.save()
+der1.save()
+der2.save()
+der3.save()
+der4.save()
+sam1.save()
+sam2.save()
+sam3.save()
+pab1.save()
+pab2.save()
+ton1.save()
+
+
+rfei1 = Reviewing(coach=fei, student=won, date = timezone.now(), skill_stars = 1, communication_stars = 5, helpfulness_stars=3, comment = "Huntaela is a good guy. I wasn't really too sure what to expect, but he explained everything to me and was very patient and understanding. From all my interactions with the guy, it seems like his intentions are good. I would recommend him to others and trust him again.")
+
+rfei2 = Reviewing(coach=fei, student=kelly, date = timezone.now(), skill_stars = 2, communication_stars = 3, helpfulness_stars=5, comment = "Beware! He was nice at first, but as we played together, I saw that his attitude and playstyle became very aggressive. At the end of our first session he linked me videos that were for beginners, which did not help at all.' Upon asking me why I didn't want to do another session with him, he became angry with me and accused me of using DotaCoach.org for hook-ups just because I wanted a coach from the Americas! He then told me I needed to change my lifestyle, and that's the last I'm ever planning to talk to him. I was trying to be nice, being one of his very students, but I cannot overlook the fact that he is just too bad-manned and aggressive for me, and probably the same for most kind people who are trying to navigate this site.")
+
+rfei3 = Reviewing(coach=fei, student=markous, date = timezone.now(), skill_stars = 4, communication_stars = 4, helpfulness_stars=5, comment = "For an affordable and convenient price my coach was able to give me the best feedback I could have asked for. Not only did he have a clear understanding of the session's topic but effective in communicating instructions. He is polite and ready to teach per any level or skill of play. Overall 5/5 would recommend.")
+
+rfei4 = Reviewing(coach=fei, student=wujimama, date = timezone.now(), skill_stars = 4, communication_stars = 3, helpfulness_stars=5, comment = "Coached me on learning a new hero, storm. First watched him play a pub match using storm and went through decision making and how to play storm at a higher level. We then went into a lobby where he went through patiently on techniques and tricks of using the hero. Really helpful and would definitely get more sessions in the future. ")
+
+rfei5 = Reviewing(coach=fei, student=luke, date = timezone.now(), skill_stars = 4, communication_stars = 3, helpfulness_stars=5, comment = "Eddy is a nice young man, he's a very good wr and ofc he plays others heroes as well. I surely recommend him.")
+
+rder1 = Reviewing(coach=der, student=won, date = timezone.now(), skill_stars = 3, communication_stars = 3, helpfulness_stars=4, comment = "Terrific session, very positive and friendly coach, had great ideas on how to improve, notable large improvement over only two hours!")
+
+rder2 = Reviewing(coach=der, student=kelly, date = timezone.now(), skill_stars = 5, communication_stars = 3, helpfulness_stars=5, comment = "Gave lots of valuable inputs throughout a game and explained in a really good and simple way why he did what he did, and why he bought the items he bought. Really patient and relaxed guy. You should totally try him out!")
+
+rder3 = Reviewing(coach=der, student=markous, date = timezone.now(), skill_stars = 3, communication_stars = 5, helpfulness_stars=5, comment = "A good coach and a great player. Looking forward to getting more lessons!")
+
+rder4 = Reviewing(coach=der, student=wujimama, date = timezone.now(), skill_stars = 5, communication_stars = 5, helpfulness_stars=5, comment = "Took a second lesson, with a new character, and still awesome. Got a new point of view on certain things. He's the man!")
+
+rsam1 = Reviewing(coach=sam, student=won, date = timezone.now(), skill_stars = 5, communication_stars = 3, helpfulness_stars=5, comment = "I would recommend him to anyone but be aware that he is not a sugar coated coach, which means that if you make a mistake he will explain you what you did wrong and how to fix it, but he will not have mercy if you persist in repeating it.")
+
+rsam2 = Reviewing(coach=sam, student=kelly, date = timezone.now(), skill_stars = 3, communication_stars = 5, helpfulness_stars=5, comment = "Friendly and down to earth guy. Managed to learn a lot during our session. Will come back for more lessons.")
+
+rsam3 = Reviewing(coach=sam, student=markous, date = timezone.now(), skill_stars = 5, communication_stars = 5, helpfulness_stars=3, comment = "Huntaela is a good guy. I wasn't really too sure what to expect, but he explained everything to me and was very patient and understanding. From all my interactions with the guy, it seems like his intentions are good. I would recommend him to others and trust him again.")
+
+rpab1 = Reviewing(coach=pab, student=won, date = timezone.now(), skill_stars = 3, communication_stars = 5, helpfulness_stars=3, comment = "This guy is a fantastic coach! He really goes in depth for what needs to be done! I learnt some advanced mechanics for mid lane as well as some cool SHADOW FIEND tricks that aren't easy to learn. ps, whoever wrote that negative review has no idea what they're talking about 10/10 for Huntaela")
+
+rpab2 = Reviewing(coach=pab, student=kelly, date = timezone.now(), skill_stars = 5, communication_stars = 4, helpfulness_stars=3, comment = "Great coach, I plan on returning for many sessions in the future. Obviously knowledgeable with much experience in Dota.")
+
+rton1 = Reviewing(coach=ton, student=won, date=timezone.now(), skill_stars=5, communication_stars = 4, helpfulness_stars=4, comment = "We watched several replays together as practice for some upcoming low-level tournament games. I learned a lot about efficient spell and item usage and some of the things that I could do to get more out of both laning and my spells. HuntaeLa did a good job of balancing what we needed to work on as a team, while also helping me individually and answering my questions. Very knowledgeable about the game, and made clear and easy to understand points. He also did a really good job of making sure I understood the concepts he was trying to explain. Overall a great experience, 5 stars.")
+
+rfei1.save()
+rfei2.save()
+rfei3.save()
+rfei4.save()
+rfei5.save()
+rder1.save()
+rder2.save()
+rder3.save()
+rder4.save()
+rsam1.save()
+rsam2.save()
+rsam3.save()
+rpab1.save()
+rpab2.save()
+rton1.save()
+
+
+
+Coach.objects.filter(userid="fei").update(overview="Hi, im Rallphy from Serbia, 25 yrs old, been playing Dota since 2004. I play for semi-pro team Chilly Willy, competing in various online tours, as well as domestic LANs, and we are currently playing Join Dota Pro MLG league season 5 in Divison 2. My main role is support, but over 10 years of experience means that i understand every role equally and can play it as good. I have a lot of experience in Dota coaching, since i\'ve been coaching a lot of friends for a long time :) I tend to be very detailed and straightforward. I offer: \
+1. Pub game party, playing the heroes/combinations of your choice \
+2. Observing (i play, you watch as spectator or coach, or vice -versa with explanations for every build, your hero choice) \
+3. Drafting and itemization explanations \
+4. 1v1 lobby games or vs bots \
+5. Replay analysis \
+I am specialized mainly in support role (4th and 5th position, jungle included) but as i\'ve mentioned, vast experience and years contribute towards knowing each role equally. \
+My dotabuff profile: \
+http://www.dotabuff.com/players/71625048\
+NEW STUDENTS OFFER Send me a replay of your choice (your own, pro games, any game) before or after training session and i will analyze it and give feedback, for free. \
+Feel free to add me or ask any question u might have, see u ingame! ")
+
+
+Coach.objects.filter(userid="der").update(overview="I'm an experienced coach available to help both beginning and experienced players make the transition from being a casual player to one with advanced mechanics and sharper skills.\
+I\'ve played DotA for over 7 years and DotA 2 since its release. In the original DotA I competed in the Dota League Division 3.\
+In DotA 2 I got more serious about improving, and forced myself to do many of the exercises and drills that I now have my students doing.\
+When I got to 6000 rank, I began playing in amateur leagues on a few different teams, and coaching some players on the side. We competed in the Amateur Dota 2 League, League of Dota, the Starladder Amateur Series, the JoinDota League, and finally in the ESL Qualifiers in April 2014.\
+I decided to focus primarily on coaching after that, and have taken on several new students since then. My students\' ranks have ranged from below 2000 to just under 5000, but all of them began to demonstrate improvement after just a few sessions.\
+We drill specific skills and maneuvers, practice different lane scenarios, and play lots of 1v1s. We do live coaching, work our way through replays, and analyze professional games together. I also regularly play public games with my students.\
+If you'd like to contact me with questions or concerns prior to booking, please contact me.")
+
+Coach.objects.filter(userid="sam").update(overview="Hey guys, I\'m D3XTR and if you are interested in becoming an awesome support, getting your rank higher, or improving your mechanics of the game, you are at the right place! I specialize at Wisp, but I also play mid / carry / offlane, basically anything. My rank on my main account is 6600, but lately I\'ve made a lot of smurfs. I also stream on twitch from time to time, you can check me out at twitch.tv/D3XTR\
+Highlight of my wisp (gameplay): http://youtu.be/qdGq4FsgQps \
+Made by NoobfromUA.\
+I speak fluent English and Russian!\
+I hope to see you guys soon!\
+Sincerely,\
+D3XTR")
+
+Coach.objects.filter(userid="pab").update(overview="Hello, I\'m SunBhie from formerly of MVP.Hot6. I\'m a TI5 Qualifiers winner (SEA), TI5 last placer, and MPGL7 winner.\
+I used to play poker, and there was a time where I got stuck at a certain limit, and had to get coaching. It was like mad expensive too. I don\'t even think it helped me that much, so I felt a little bitter about it. So here\'s wassup. We can talk about my coaching for like 10-15min free, no pressure, and you can see for yourself if you want to commit or not.\
+You can contact me on Skype: PJLWORLD\
+My steam friendlist is nearing full, please try to talk to me through Skype, I may not accept requests on Steam!\
+Just mention coaching when you add me. I\'m currently in Ontario CA.\
+No regional preference. I\'ll coach any region as long as we can communicate. Scheduling should be adjustable for the most part.\
+Coaching programs will be unique from player to player, tailoring to each player\'s needs. \
+Here are some of the things you can expect:\
+* I\'ll sit as a coach in-game and watch your game. We may even do live sweat sessions through screenshare in a ranked match.\
+* We\'ll watch replay together and talk dota, and discuss game theory.\
+* Attitude, mindset adjustments and tryharding\
+I can teach every role. You can check my dotabuff for validity. And if I\'m not comfortable with something I won\'t bullshit you, I\'ll tell you straight up.\
+I think the most important thing when it comes to purchasing a coaching session is some form of security. Security in that you will improve. And quite frankly, I don\'t know if I can give you that. I\'m not sure if anyone could. Much of that is on you just as it\'s on me. What I can promise you is my absolute best.\
+10/29/2015 Edit\
+Hey, fam. I\'ve decided to increase my rate for a few reasons. I\'ve been undercutting other 6k coaches which is unfair and rather cutthroat. I\'ve also recently hit my rank milestone, so I think I have more to offer than before. And generally speaking, I think I\'m worth your time for the new rate. My former students will be *grandfathered in for the previous rate, and the same will apply to future rate adjustments.\
+*this means that, if I charged you $19.50 before, the rate won\'t change for you. And so on and so forth for future adjustments.\
+I know I\'ve lost some students lately because I\'ve been busy, and I forget to speak to them again (sorry). Sometimes, I feel hesitant to talk to potential students because I feel as though that coaching\'s a sort of an impulse purchase. You may feel like you need a coach right now, and then maybe three days later you feel otherwise. I do take this very seriously, but I just want to avoid being a pestering salesman. So, don\'t be afraid of opening a convo with me on your end if this is something you really want.")
+
+Coach.objects.filter(userid="ton").update(overview="Hello! \
+My name is HellioN, I am 20 and I'll coach the shit out of you.\
+I played wc3 dota 1 like 5 years from battle.net to garena.\
+Moved to dota 2 about 3 years ago and practiced since then seriously. Played some competitive stuff at amateur and semi-pro level on starladder and jd leagues. Since ranked system I\'ve been trying to climb and got 6 from 4.4. After that I didn\'t enjoy playing with 1.5k+ lower ranks than I were(no offence) that much, so I played some NEL and EEL stuff.\
+Now I coach people, it\'s been a lot of fun for me and most of the students that I had were satisfied, so I expect more fun and more coaching. Through the Dota Coaching Progress Experiment, I was part of a team of two who coached a student to improve 1600 rank (highest among all students) over two months 1000 party and 600 solo. My main role is mid but I will try my best to explain all the stuff despite different levels of skill. There are several ways of coaching :\
+• First one is live coaching, I coach, tell you tips give you orders where to farm or when to push or anything like that and information in general about the current game while you play.\
+• Second is replay analysis, if you have any questions regarding the game you played or any other game, we could make things more clear whether its teamfight or just decision making or whatever you wonder about. Most informative analyses could be made from games that didn't go really well and you have a lot questions.(not ones you carried 21-0)\
+(You can also send me replay I analyze it before we meet and then I will explain what happened and emphasize key points in live session with you, it does not matter if its team game or just pub game, any kind of game that you wanna know more works.)\
+•Third is I play and student watches, during that time I talk about my decisions what I am going to do and why, at the same time student asks me questions if he wonders about anything.\
+• Fourth is 1v1, its mostly used by core players, I teach things about laning phase, how to stand, when to be aggressive, how control lane or how to aggro creepwave when necessary etc...\
+Sometimes If we have time left after live coaching or replay analysis we do 1v1s or just general question answering. Also if the time is over and I still have left something to explain or you have questions I will stay extra time and will make it done without any additional payments.\
+I get (14$) per hour via paypal. If you want to contact me or have any questions you can add me directly form here : http://steamcommunity.com/profiles/76561198057535528/ or write me an e-mail : Qishmishi@ymail.com \
+IF I DON\'T RESPOND ON STEAM ON TIME YOU CAN ADD ME ON SKYPE DIRECTLY.")
+
+
+
+from sideapp.models import *
+selected_coach = Coach.objects.get(userid="fei")
+selected_coach.num_student()
+
+
+
+
+count the number of student it has
+
+#first import count
+from django.db.models import Count
+
+This is a demo of how many student the coach has taught
+fei = Coach.objects.get(userid="fei")   //First get the object Fei
+students = Coaching.objects.filter(coach=fei)
+students.aggregate(Count("student",distinct=True))
+
+
+
+
+

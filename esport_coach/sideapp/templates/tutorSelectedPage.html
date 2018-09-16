@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Esports Coach</title>
+        <meta name="description" content=""esports coach>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% load static from staticfiles %}
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}" >
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/simple-sidebar.css' %}">
+        <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Muli:100,300,400,300italic,400italic" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <!--NavBar-->
+        {% include "nav_bar.html" %}
+
+        <!-- jumbotron -->
+        <div class="jumbotron">
+            <div class="container text-center">
+                <br>
+                <h1>Connect with Coach</h1><br>
+                <p>A step closer to play like a PRO</p>
+            </div>
+        </div>
+
+        <!-- Tutor Info Panel -->
+        <div class="panel panel-default" style="margin-right:15%; margin-left:15%;">
+            <h2 align="center">Coach {{ coach.pname }}</h2>
+            <div class="row promo-top" style="margin-right:5%; margin:0% 5% 3% 5%;">
+                <div class="col-xs-0 col-sm-3 text-right">
+                    <img src="{{ coach.avatar }}" style="border-radius:100px;">
+                </div>
+                <div class="col-xs-12 col-sm-2 text-center" style="padding-right:0%; padding-left:0%;">
+                    <br>
+                    <div><a onclick="">Reputation:</a>
+                        <div>125</div>
+                        <div>top #% of coaches</div>
+                        <div>
+                            <a onclick="">Reviews:</a><br>
+                            <span>{{ coach.avg_review }}</span>/5
+                            <p id="finalRating"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-2 text-right" style="width:140px; font-weight:bold;">
+                    <br>
+                    <div>Rank</div>
+                    <div>Server</div>
+                    <div>Cost</div>
+                    <div>Hours Coached</div>
+                    <div>Steam Name</div>
+                    <div>Skype Name</div>
+                </div>
+                <div class="col-xs-12 col-sm-2 text-left" style="padding:0; width:135px;">
+                    <br>
+                    <div>{{ coach.rank }}</div>
+                    <div>{{ coach.server }}</div>
+                    <div>${{ coach.pricerate }} USD/hr</div>
+                    <div>56</div>
+                    <div>{{ coach.pname }}</div>
+                    <div>{{ coach.skypeid }}</div>
+                </div>
+                <div class="col-xs-12 col-sm-2 text-center" style="padding:0; width:135px;">
+                    <br>
+                    <div><img src="{% static 'pictures/email_icon.jpg' %}" height="50" width="50"></div>
+                    <div>Email Coach </div>
+                    <div><i class='glyphicon glyphicon-star' style="font-size:50px;"></i></div>
+                    <div>Rate Coach</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tutor Description Panel -->
+        <div class="panel panel-default" style="margin-right:15%; margin-left:15%;" align="center">
+            <div id="content" class="panel-body" style="margin-right:2%; margin-left:2%; text-align:left">
+                <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                    <li class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+                    <li><a href="#cost" data-toggle="tab">Cost</a></li>
+                    <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
+                    <li><a href="#reputation" data-toggle="tab">Reputation</a></li>
+                    <li><a href="#contact_coach" data-toggle="tab">Contact Coach</a></li>
+                </ul>
+                <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane active" id="overview">
+                        <br>
+                        <h4>Who Am I?</h4>
+                        {{ coach.overview }}
+                    </div>
+                    <div class="tab-pane" id="cost">
+                        <br>
+                        <p>Pricing is as follows:<br><br>
+                           The current price rate for Coach {{ coach.pname }} is: <em>{{ coach.pricerate }} $/hr</em><br>
+                           To find out if there's a discount on deals (e.g. >20hrs), please contact the coach directly using the email provided in the coach profile (click on the 'Email Coach' icon)
+                    </div>
+                    <div class="tab-pane" id="reviews">
+                            <!-- Coach rating form -->
+                            <h4>Rate Coach {{ coach.pname }}</h4>
+                            <form id="form_review" method="get" action="/sideapp/reviewcoach/{{coach.userid}}">
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <span style="font-size:20px;"><input type="number" name="ratingSkill" id="ratingSkill" class="rating"/></span>
+                                    </div>
+                                    <div class="form-group">Skill</div>
+                                </div>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <span style="font-size:20px;"><input type="number" name="ratingCommunication" id="ratingCommunication" class="rating"/></span>
+                                    </div>
+                                    <div class="form-group">Communication</div>
+                                </div>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <span style="font-size:20px;"><input type="number" name="ratingHelpfulness" id="ratingHelpfulness" class="rating"/></span>
+                                    </div>
+                                    <div class="form-group">Helpfulness</div>
+                                </div>
+                                <br>
+                                <textarea id="textarea_review" name="textarea_review" class="form-control" maxlength="300" placeholder="Write your honest review (max: 300 chars)..."></textarea>
+                                <button id="submitButton" type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                            <div id="form_review_messages"></div>
+                            <br>
+
+                            <!-- Latest coach ratings -->
+                            <div id="coach_reviews"></div>
+
+                            <!-- Button for pagination -->
+                            <!-- <a id="button_list" class="btn btn-info navbar-btn navbar-left">List</a> -->
+                    </div>
+                    <div class="tab-pane" id="reputation"></div>
+                    <div class="tab-pane" id="contact_coach"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson Schedule Info -->
+        <div class="panel panel-default" style="padding-top:1%; margin-right:15%; margin-left:15%;" align="center">
+            <div class="panel-body">
+                <form id="form_payment" method="GET" action="/sideapp/paymentpage/{{coach.userid}}">
+
+                    <div class="col-xs-0 col-sm-4 text-left" style="width:25%; padding:0;">
+                        <a href="/sideapp/paymentPage/{{coach.username}}" ><img src="{% static 'pictures/stripe-logo.png' %}" style="width: 350px; height: 150px;" alt="Pay now with Stipe" /></a>
+                    </div>
+
+                    <div class="col-xs-0 col-sm-3 text-left" style="width:75%;">
+                        <!-- How long? -->
+                        <br>
+                        <div class="col-xs-0 col-sm-3 text-right" style="width:25%; padding-right:3%;">
+                            <span style="font-size:16px; font-weight:bold;">How Long?</span>
+                        </div>
+                        <div class="col-xs-0 col-sm-3 text-left" style="width:75%;padding:0%;">
+                        <!-- Quantity -->
+                            <select class="dropdown" name="lesson_duration" style="width:390px">
+                                <option value="lesson_dura">Lesson duration in hours</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+
+                        <!-- Textarea to specify the date and time -->
+                        <div class="col-xs-0 col-sm-3 text-right" style="width:25%; padding-right:3%;">
+                            <span style="font-size:16px; font-weight:bold;">When?</span>
+                        </div>
+                        <div class="col-xs-0 col-sm-3 text-left" style="width:75%;padding:0%;">
+                            <textarea id="request_comment" name="lesson_date_time" class="form-control" style="width:390px" maxlength="100" placeholder=" Enter all available date and time (max: 300 chars)..."></textarea>
+                        </div>
+                    </div>
+                    <div style="width:88%;" align="right">
+                        <a href="/sideapp/paymentPage/{{coach.userid}}" class="btn btn-info navbar-btn navbar-right">Submit</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <!-- BELOW ARE ALL THE SCRIPTS -->
+
+        <!-- Script for the average rating stars -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+        <!-- Script to render the reviews rating stars in the page when loaded.  -->
+        <script>
+            $(function (){
+                document.getElementById("finalRating").innerHTML = renderAllReviews({{ coach.avg_review }});
+            });
+
+            function renderAllReviews(final_avg_review){
+                temp = "";
+                for (i = 0; i < final_avg_review; i++) {
+                    temp += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                }
+                for (i = final_avg_review; i < 5; i++) {
+                    temp += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                }
+                return temp;
+            }
+        </script>
+
+        <!-- Script to render the correct coach average rating stars in the page when loaded.  -->
+        <script>
+            $(function() {
+                var form = $('#form_review');                   // Get the form.
+                var formMessages = $('#form_review_messages');  // Get the messages div.
+
+                $(form).submit(function(event){                // Set up an event listener for the contact form.
+                    event.preventDefault();                     // Stop the browser from submitting the form.
+                    var formData = $(form).serialize();         // Serialize the form data.
+                    $.ajax({                                    // Submit the form using AJAX.
+                        type: 'GET',
+                        url: $(form).attr('action'),
+                        data: formData,
+                        dataType:'text',
+                    })
+                    .done(function(response){
+                            if (response.includes("Error")){
+                                $("#form_review_messages").html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
+                            }
+                            else {
+                                $("#form_review_messages").html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+response+"</div>");
+                                $('#textarea_review').val('');        // Clear the textarea.
+                            }
+                    })
+                    .fail(function(response){
+                        alert("Oops! An error occured sending your review.");
+                    });
+                });
+            });
+        </script>
+
+        <!-- Script to render the reviews in the page when loaded.  -->
+        <script>
+            $(window).load(function() {
+                $.ajax({
+                        type: 'GET',
+                        url: "/sideapp/renderReviews/{{coach.userid}}/",
+                        dataType: "json",
+                    })
+                    .done(function(response){
+                        var overall = 0;
+                        var context = ""
+
+                        for (var review in response){
+                            context += "<div class='panel panel-default' style='border:NONE;'><div class='panel-body' style='padding-left:0; padding-right:0; padding-bottom:5;'><div class='col-xs-0 col-sm-3 text-left' style='width:220px;'>";
+
+                            // For the overall stars
+                            context += "<div class='form-inline' style='width:215px;'><div class='form-group'>";
+                            overall = parseInt((response[review]["fields"]["skill_stars"] + response[review]["fields"]["communication_stars"] + response[review]["fields"]["helpfulness_stars"])/3);
+                            for (i=0; i<overall; i++){
+                                context += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                            }
+                            for (i=overall; i<5; i++){
+                                context += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                            }
+                            context += "</div><div class='form-group' style='padding-left:1%;'>Overall</div></div>";
+
+                            // For the skill stars
+                            context += "<div class='form-inline' style='width:215px;'><div class='form-group'>";
+                            for (i=0; i<response[review]["fields"]["skill_stars"]; i++){
+                                context += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                            }
+                            for (i=response[review]["fields"]["skill_stars"]; i<5; i++){
+                                context += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                            }
+                            context += "</div><div class='form-group' style='padding-left:1%'>Skill</div></div>";
+
+                            // For the Communication stars
+                            context += "<div class='form-inline' style='width:215px;'><div class='form-group'>";
+                            for (i=0; i<response[review]["fields"]["communication_stars"]; i++){
+                                context += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                            }
+                            for (i=response[review]["fields"]["communication_stars"]; i<5; i++){
+                                context += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                            }
+                            context += "</div><div class='form-group' style='padding-left:1%;'>Communication</div></div>";
+
+                            // For the skill stars
+                            context += "<div class='form-inline' style='width:215px;'><div class='form-group'>";
+                            for (i=0; i<response[review]["fields"]["helpfulness_stars"]; i++){
+                                context += "<i class='glyphicon glyphicon-star' style='font-size:20px;'></i>";
+                            }
+                            for (i=response[review]["fields"]["helpfulness_stars"]; i<5; i++){
+                                context += "<i class='glyphicon glyphicon-star-empty' style='font-size:20px;'></i>";
+                            }
+                            context += "</div><div class='form-group' style='padding-left:1%;'>Helpfulness</div></div>";
+
+                            // For the comment
+                            context += "</div><div class='col-xs-12 col-sm-2 text-left' style='width:510px; '>"+response[review]["fields"]["comment"]+"<br>- <em>"+response[review]["fields"]["student"]+"</em></div></div>";
+                        }
+
+                        console.log("{{ user.social_auth.get.extra_data.player.personaname }}")
+                        $("#coach_reviews").html(context);
+                    })
+                    .fail(function(response){
+                        alert("Oops! An error occured loading the reviews.");
+                    });
+                });
+        </script>
+
+        <!-- Script for the lesson schedule and payment information  -->
+
+
+        <!-- Script for script pagination -->
+        <!---
+        <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script>
+            $('#coach_reviews').bootpag({
+                total: 50,
+                page: 2,
+                maxVisible: 5,
+                leaps: true,
+                firstLastUse: true,
+                first: '←',
+                last: '→',
+                wrapClass: 'pagination',
+                activeClass: 'active',
+                disabledClass: 'disabled',
+                nextClass: 'next',
+                prevClass: 'prev',
+                lastClass: 'last',
+                firstClass: 'first'
+            }).on("page", function(event, num){
+                $(".content4").html("Page " + num); // or some ajax content loading...
+            });
+        </script> -->
+
+        <!-- Script for the tutor description tabs -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                    $('#myTab a').click(function (e) {
+                        e.preventDefault()
+                        $(this).tab('show')
+                    })
+                    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                        e.relatedTarget // previous tab
+                    });
+                });
+        </script>
+
+        <!-- Scripts for the calendar -->
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+        <script>
+            if (top.location != location) {
+            top.location.href = document.location.href ;
+            }
+            $(function(){
+                window.prettyPrint && prettyPrint();
+                $('#dp1').datepicker({
+                    format: 'mm-dd-yyyy'
+                });
+                $('#dp2').datepicker();
+                $('#dp3').datepicker();
+                $('#dp3').datepicker();
+                $('#dpYears').datepicker();
+                $('#dpMonths').datepicker();
+
+                var startDate = new Date(2012,1,20);
+                var endDate = new Date(2012,1,25);
+                $('#dp4').datepicker()
+                    .on('changeDate', function(ev){
+                        if (ev.date.valueOf() > endDate.valueOf()){
+                            $('#alert').show().find('strong').text('The start date can not be greater then the end date');
+                        } else {
+                            $('#alert').hide();
+                            startDate = new Date(ev.date);
+                            $('#startDate').text($('#dp4').data('date'));
+                        }
+                        $('#dp4').datepicker('hide');
+                    });
+                $('#dp5').datepicker()
+                    .on('changeDate', function(ev){
+                        if (ev.date.valueOf() < startDate.valueOf()){
+                            $('#alert').show().find('strong').text('The end date can not be less then the start date');
+                        } else {
+                            $('#alert').hide();
+                            endDate = new Date(ev.date);
+                            $('#endDate').text($('#dp5').data('date'));
+                        }
+                        $('#dp5').datepicker('hide');
+                    });
+
+                // disabling dates
+                var nowTemp = new Date();
+                var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+                var checkin = $('#dpd1').datepicker({
+                  onRender: function(date) {
+                    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+                  }
+                }).on('changeDate', function(ev) {
+                    if (ev.date.valueOf() > checkout.date.valueOf()) {
+                        var newDate = new Date(ev.date)
+                        newDate.setDate(newDate.getDate() + 1);
+                        checkout.setValue(newDate);
+                    }
+                    checkin.hide();
+                    $('#dpd2')[0].focus();
+                }).data('datepicker');
+                var checkout = $('#dpd2').datepicker({
+                    onRender: function(date) {
+                    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+                    }
+                }).on('changeDate', function(ev) {
+                    checkout.hide();
+                }).data('datepicker');
+            });
+        </script>
+        <script src="{% static 'js/urchin.js' %}" type="text/javascript"></script>
+        <script type="text/javascript">
+            _uacct = "UA-106117-1";
+            urchinTracker();
+        </script>
+    </body>
+</html>

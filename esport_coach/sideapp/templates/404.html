@@ -1,0 +1,39 @@
+<!--This is the page when user try to browse player ranking and return an error saying the page still under develope,
+    user can submit email and we'll inform them when the page is up.-->
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Error Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {% load static from staticfiles %}
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}" >
+        <link href='//fonts.googleapis.com/css?family=Fenix' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="main">
+                <h3>Esport Coach</h3>
+                <h1>Oops Page Still Under Development</h1>
+                <p>There's a lot of reasons why this page is<span class="error"> 404</span>.<br>
+                    <span>Don't waste your time enjoying the look of it, we'll sent you an email notification if the page is live!</span></p>
+                <div class="row">
+                <div class="col-lg-12">
+                    <form method = 'POST' action = ''>{% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input name="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                                <button type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
+

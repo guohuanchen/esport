@@ -1,0 +1,29 @@
+<!-- NavBar -->
+        <nav class ="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a href="/sideapp/" class="navbar-brand">Esports Coach</a>
+                </div>
+                <div class ="collapse navbar-collapse" id="navbar-collapse">
+                    {% if userid %}
+                        <a href="/logout" class = "btn btn-info navbar-btn navbar-right"> Logout {{ userid }} </a>
+                    {% else %}
+                        <a href="/sideapp/register" class="btn btn-info navbar-btn navbar-right">Register</a>
+                        <a href="/sideapp/login" class="btn btn-info navbar-btn navbar-right">Login</a>
+                    {% endif %}
+                    <!--   <a href="" class="btn btn-info navbar-btn navbar-right">Log in</a> -->
+                    <ul class="nav navbar-nav">
+                        <li><a href="/sideapp/">Home</a>
+                        <li><a href="#how">How it works</a>
+                        <li><a href="/sideapp/player_rank">Player Ranking</a>
+                        <li><a href="/sideapp/contact">Contact Us</a>
+                    </ul>
+                </div>
+            </div>
+        </nav><!--  End Nav Bar -->

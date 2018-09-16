@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Results</title>
+
+        {% load static from staticfiles %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/simple-sidebar.css' %}">
+    </head>
+
+    <body>
+        {% include "nav_bar.html" %}
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper"  style="clear: both; float:left; top:50px">
+          <form id="form_search" method="get" action="/sideapp/searchCoach">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/sideapp/listOfCoaches">Tutor Search</a>
+                </li>
+                <li class="dropdown">
+                    <select name="Server" style="background-color:#222; color:White; border:none">
+                        <option>Region Server</option>
+                        <option>------</option>
+                        <option>Africa</option>
+                        <option>Asia</option>
+                        <option>Australia</option>
+                        <option>Europe</option>
+                        <option>NA</option>
+                        <option>LA</option>
+                        <option>Russia</option>
+                    </select>
+                </li>
+                <li class="dropdown">
+                    <select name="Role" style="background-color:#222; color:White; border:none">
+                        <option>Role</option>
+                        <option>------</option>
+                        <option>Top</option>
+                        <option>Mid</option>
+                        <option>Support</option>
+                        <option>ADC</option>
+                        <option>Jungle</option>
+                    </select>
+                </li>
+                <li class="dropdown">
+                    <select name="Champion" style="background-color:#222; color:White; border:none">
+                        <option>Champion</option>
+                        <option>------</option>
+                        <option>Ahri</option>
+                        <option>Darius</option>
+                        <option>Fiora</option>
+                        <option>Leona</option>
+                        <option>Lee Sin</option>
+                        <option>Lucian</option>
+                        <option>Zed</option>
+                    </select>
+                </li>
+                <li class="dropdown">
+                    <select name="Rank" style="background-color:#222; color:White; border:none">
+                        <option>Rank</option>
+                        <option>------</option>
+                        <option>Bronze</option>
+                        <option>Silver</option>
+                        <option>Gold</option>
+                        <option>Platinum</option>
+                        <option>Diamond</option>
+                        <option>Challenger</option>
+                    </select>
+                </li>
+                <li class="dropdown">
+                    <select name="price" style="background-color:#222; color:White; border:none">
+                        <option>Price Rate</option>
+                        <option>------</option>
+                        <option>$1-$10</option>
+                        <option>$10-$20</option>
+                        <option>$20-$30</option>
+                        <option>$30-$40</option>
+                        <option>$40-$50</option>
+                    </select>
+                </li>
+                <input value="Search!" type="submit" style="background-color:#222;
+                              color:#999999; border-style:none; margin-left:20px;
+                              margin-top:10px"/>
+            </ul>
+          </form>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <div id="wrapper">
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12" style="top:20px">
+                            <h1>Results</h1>
+
+                            <table class ="table table-striped">
+                                <thead>
+                                    <tr class ="stuff">
+                                        <!--  <th class ="leader-name">Rank</th> -->
+                                        <th class ="leader-name">Coach</th>
+                                            <th>Rank</th>
+                                            <th>Server</th>
+                                            <th>Hero</th>
+                                            <th>Role</th>
+                                            <th class="col-md-1">Rating</th>
+                                            <th>Price/hr($)</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody style = "font-size:16px" id="test">
+                                    {% if coaches %}
+                                        {% for coach in coaches %}
+                                            <tr onclick="window.location.href='/sideapp/tutorSelected/{{coach.7}}'" style="cursor: pointer;">
+                                                {% for attribute in coach %}
+                                                    {% if forloop.counter != 8 %}
+                                                        <td>{{attribute}}</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                            <tr>
+                                                <td>No coaches available.</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form id="form_test" method="get" action="/sideapp/tutorselected">
+        </form>
+
+        <!-- jQuery -->
+        <script src="{% static 'dajax/jquery.dajax.core.js' %}" type="text/javascript"></script>
+        <script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="{% static 'js/jquery-2.1.0.min.js' %}"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+        <script>
+            $("#menu-toggle").click(function() {
+            $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+
+        <script> // Function to populate list of coaches with specified criteria.
+            $(function() {
+                var form = $('#form_search');                   // Get the form.
+
+                $(form).submit(function(event) {                // Set up an event listener for the contact form.
+                    event.preventDefault();                     // Stop the browser from submitting the form.
+                    var formData = $(form).serialize();         // Serialize the form data.
+                    $.ajax({                                    // Submit the form using AJAX.
+                        type: 'GET',
+                        url: $(form).attr('action'),
+                        data: formData,
+                        dataType:'json',
+                    })
+                    .done(function(response) {
+                        var context = "";
+                        for (var i=0; i<response['coaches'].length; i++)
+                        {
+                          coach = response["coaches"][i]
+                          context += "<tr onclick=\"window.location.href='/sideapp/tutorSelected/"+coach["userid"]+"'\" style=\"cursor: pointer;\">";
+                          context += "<td>" + coach["pname"] + "</td>" +
+                                     "<td>" + coach["rank"] + "</td>" +
+                                     "<td>" + coach["server"] + "</td>" +
+                                     "<td>" + coach["champion"] + "</td>" +
+                                     "<td>" + coach["role"] + "</td>" +
+                                     "<td>" + coach["rating"] + "</td>" +
+                                     "<td>" + coach["pricerate"] + "</td>";
+                          context += "</tr>";
+                        }
+                        $('#test').html(context);
+                    })
+                    .fail(function(response) {
+                        if (response.responseText == 'not found'){
+                            var context = "<tr><td>No coaches available.</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+                            $('#test').html(context);
+                        }
+                        else{
+                            alert("Oops! An error occured searching coaches.");
+                        }
+                    });
+                });
+            });
+        </script>
+
+    </body>
+</html>
